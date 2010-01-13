@@ -46,10 +46,10 @@ sub static {
 	print $command and system($command);
 }
 
+print "Usage: $0 <BUILD-TYPE>\nBUILD TYPES:\n\tshared - compile GSC into a shared library for dynamic runtime linking.
+\tstatic - compile GSC into a static library for compilation linking.\n" and exit unless @ARGV;
+
 while ((my $arg = shift(@ARGV))) {
 	if ($arg =~ "shared")      { shared; }
-	elsif ($arg =~ "static") { static; }
-	else { print 
-		"Usage: $0 <BUILD-TYPE>\nBUILD TYPES:\n\tshared - compile GSC into a shared library for dynamic runtime linking.
-		\tstatic - compile GSC into a static library for compilation linking.\n" and exit; }
+	elsif ($arg =~ "static")   { static; }
 }
