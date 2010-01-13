@@ -1,16 +1,22 @@
 #include "../GSC.h"
-#include <fstream>
 
 using namespace gsc;
+
+void gsc::quit (int quitCode) {
+	texture_delete_all();
+
+	exit(quitCode);
+}
 
 void utils::fatal (std::string error) {
 	if (error != "")
 		std::cout << "GSC-FATAL -> " << error << std::endl;
-	exit(1);
+	quit(1);
 }
 
 void utils::fatal () {
-	exit(1);
+	std::cout << "GSC-FATAL" << std::endl;
+	quit(1);
 }
 
 void * utils::c_malloc(size_t size)

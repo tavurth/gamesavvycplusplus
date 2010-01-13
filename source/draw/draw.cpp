@@ -14,10 +14,10 @@ void draw::rect (float x, float y, float w, float h) {
 	glPopMatrix();
 }
 
-void draw::texture (GLuint tex, float x, float y, float z, float w, float h) {
+void draw::texture (Texture * tex, float x, float y, float z, float w, float h) {
 	glPushMatrix();
 	glTranslatef(x,y,z);
-	glBindTexture(GL_TEXTURE_2D, tex);
+	glBindTexture(GL_TEXTURE_2D, tex->get_id());
 	glBegin(GL_QUADS);
 		glTexCoord2d(0.01,0.01);	glVertex3f(0, 0, 0);
 		glTexCoord2d(0.99,0.01);	glVertex3f(w, 0, 0);

@@ -9,9 +9,10 @@ namespace gsc {
 		char * data;
 		std::string location;
 		short width, height, bpp;
-		int id, format;
+		int id, format, error;
 
-		void check_texture(int error);
+		void check();
+		void setup_parameters();
 
 		public:
 			Texture();
@@ -40,6 +41,8 @@ namespace gsc {
 	extern GLuint TEXTURE_WRAP_S;
 	extern GLuint TEXTURE_MIN_FILTER;
 	extern GLuint TEXTURE_MAG_FILTER;
+
+	void texture_delete_all();
 
 }
 
