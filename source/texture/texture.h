@@ -19,6 +19,9 @@ namespace gsc {
 			~Texture();
 			void initialise();
 			void free_data();
+			void erase();
+
+			bool operator==(const Texture &to_find) const;
 
 			void set_data(char *);
 			void set_location(std::string);
@@ -26,14 +29,14 @@ namespace gsc {
 			void set_height(short);
 			void set_bpp(short);
 			void set_format(int);
-			void set_id(GLuint);
+			void set_id(int);
 
 			char * get_data();
 			int    get_format();
 			short  get_width();
 			short  get_height();
 			short  get_bpp();
-			GLuint get_id();
+			int    get_id();
 			std::string get_location();
 	};
 

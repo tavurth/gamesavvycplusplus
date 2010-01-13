@@ -15,7 +15,7 @@ void   Texture::set_width(short new_width)		 { width    = new_width; }
 void   Texture::set_height(short new_height)		 { height   = new_height; }
 void   Texture::set_bpp(short new_bpp)			 { bpp      = new_bpp; }
 void   Texture::set_location(std::string new_location)   { location = new_location; }
-void   Texture::set_id(GLuint new_id) 			 { id       = new_id; }
+void   Texture::set_id(int new_id) 			 { id       = new_id; }
 
 //Get functions
 std::string Texture::get_location()  { return location; }
@@ -24,7 +24,7 @@ int    Texture::get_format()	     { return format; }
 short  Texture::get_width()	     { return width; }
 short  Texture::get_height()	     { return height; }
 short  Texture::get_bpp()	     { return bpp; }
-GLuint Texture::get_id()	     { return id; }
+int    Texture::get_id()	     { return id; }
 
 //Check texture for errors
 void Texture::check () {
@@ -86,14 +86,36 @@ Texture::Texture () {
 	textureList.push_back(this);
 }
 
+bool Texture::operator==(const Texture &to_find) const {
+	return (*this == to_find);
+}
+
+//Returns the vector iterator of <t>
+void Texture::erase () {
+	std::vector<Texture *>::iterator i;
+
+	for (i=textureList.begin(); i < textureList.end(); i++)
+		if (*i == this) {
+			textureList.erase(i);
+			return;
+		}
+}
+
 //Destructor
 Texture::~Texture() {
+	
+	//Delte any data that has not been cleaned up earlier
 	if (data) 
 		free(data);
+
+	//Delete OpenGL texture
 	if (id) {
 		glDeleteTextures(1, (const GLuint *) &id);
 		id = 0;
 	}
+
+	//Delete texture from <textureList>
+	this->erase();
 }
 
 //Delete all textures and clear the texture list
