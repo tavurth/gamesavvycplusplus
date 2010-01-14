@@ -21,7 +21,7 @@ using namespace gsc;
 
 std::vector<TextureType *> gsc::textureTypeList;
 
-TextureType::TextureType(std::string newName, void (*newFunction)(std::string)) {
+TextureType::TextureType(std::string newName, textureTypeFunc newFunction) {
 	name = newName;
 	function = newFunction;
 
@@ -38,7 +38,7 @@ TextureType::~TextureType() {
 		}
 }
 
-void (*TextureType::get_function())(std::string) const {
+textureTypeFunc TextureType::get_function() const {
 	return function;
 }
 
@@ -56,13 +56,11 @@ void TextureType::set_name(std::string newName) {
 
 //This function returns the correct function for loading a texture <type>
 //Pass in "example.tga" and this function might return 'Texture * (* gsc::load::tga)(std::string location)'
-void (*gsc::texture_type_find (std::string type))(std::string) {
+textureTypeFunc gsc::texture_type_find (std::string type) {
 	std::vector<TextureType *>::iterator i;
 
 	for (i=textureTypeList.begin(); i < textureTypeList.end(); i++)
-		if ((*i)->get_name().compare(type)) {
-			return (*i)->get_function();
-		}
-
+		if (!((*i)->get_name().compare(type)))
+			return ((*i)->get_function());
 	return NULL;
 }

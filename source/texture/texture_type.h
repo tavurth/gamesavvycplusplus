@@ -22,23 +22,25 @@
 
 namespace gsc {
 
+	typedef void (*textureTypeFunc)(std::string);
+
 	class TextureType { 
 		std::string name;
-		void (*function)(std::string);
+		textureTypeFunc function;
 
 		public:
-			TextureType(std::string newName, void (*newFunction)(std::string));
+			TextureType(std::string newName, textureTypeFunc newFunction);
 			~TextureType();
 
-			void (*get_function())(std::string) const;
+			textureTypeFunc get_function() const;
 			std::string get_name() const;
 
-			void set_function(void (*newFunction)(std::string));
+			void set_function(textureTypeFunc newFunction);
 			void set_name(std::string newName);
 	};
 
 	extern std::vector<TextureType *> textureTypeList;
-	void (*texture_type_find (std::string type))(std::string);
+	textureTypeFunc texture_type_find (std::string type);
 }
 
 #endif
