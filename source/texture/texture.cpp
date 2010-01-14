@@ -3,10 +3,10 @@
 using namespace gsc;
 
 //Texture options
-GLuint gsc::TEXTURE_WRAP_T;
-GLuint gsc::TEXTURE_WRAP_S;
-GLuint gsc::TEXTURE_MIN_FILTER;
-GLuint gsc::TEXTURE_MAG_FILTER;
+GLuint gsc::TEXTURE_WRAP_T     = GL_REPEAT;
+GLuint gsc::TEXTURE_WRAP_S     = GL_REPEAT;
+GLuint gsc::TEXTURE_MIN_FILTER = GL_LINEAR;
+GLuint gsc::TEXTURE_MAG_FILTER = GL_LINEAR;
 
 //Set functions
 void   Texture::set_data(char * new_data)		 { data     = new_data; }
