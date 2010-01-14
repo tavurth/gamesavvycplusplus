@@ -22,7 +22,7 @@
 
 namespace gsc {
 
-	typedef void (*textureTypeFunc)(std::string);
+	typedef Texture * (*textureTypeFunc)(std::string);
 
 	class TextureType { 
 		std::string name;
@@ -40,7 +40,9 @@ namespace gsc {
 	};
 
 	extern std::vector<TextureType *> textureTypeList;
+	std::string get_extension (std::string fullName);
 	textureTypeFunc texture_type_find (std::string type);
+	Texture * no_texture_type (std::string location);
 }
 
 #endif

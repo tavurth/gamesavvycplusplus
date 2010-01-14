@@ -28,7 +28,7 @@ TextureType::TextureType(std::string newName, textureTypeFunc newFunction) {
 	textureTypeList.push_back(this);
 }
 
-TextureType::~TextureType() {
+TextureType::~TextureType () {
 	std::vector<TextureType *>::iterator i;
 
 	for (i=textureTypeList.begin(); i < textureTypeList.end(); i++)
@@ -38,29 +38,40 @@ TextureType::~TextureType() {
 		}
 }
 
-textureTypeFunc TextureType::get_function() const {
+textureTypeFunc TextureType::get_function () const {
 	return function;
 }
 
-std::string TextureType::get_name() const {
+std::string TextureType::get_name () const {
 	return name;
 }
 
-void TextureType::set_function(void (*newFunction)(std::string)) {
+void TextureType::set_function (textureTypeFunc newFunction) {
 	function = newFunction;
 }
 
-void TextureType::set_name(std::string newName) {
+void TextureType::set_name (std::string newName) {
 	name = newName;
+}
+
+std::string gsc::get_extension (std::string fullName) {
+	return fullName.substr(fullName.find_last_of(".")+1);
+}
+
+Texture * gsc::no_texture_type (std::string location) {
+	std::cout << "Sorry, no texture type available for loading texture: " << location << std::endl;
+	return NULL;
 }
 
 //This function returns the correct function for loading a texture <type>
 //Pass in "example.tga" and this function might return 'Texture * (* gsc::load::tga)(std::string location)'
-textureTypeFunc gsc::texture_type_find (std::string type) {
+textureTypeFunc gsc::texture_type_find (std::string fullName) {
+	std::string extension = get_extension(fullName);
+
 	std::vector<TextureType *>::iterator i;
 
 	for (i=textureTypeList.begin(); i < textureTypeList.end(); i++)
-		if (!((*i)->get_name().compare(type)))
+		if (!((*i)->get_name().compare(extension)))
 			return ((*i)->get_function());
-	return NULL;
+	return &no_texture_type;
 }
