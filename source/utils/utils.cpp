@@ -19,12 +19,6 @@
 
 using namespace gsc;
 
-void gsc::quit (int quitCode) {
-	texture_delete_all();
-
-	exit(quitCode);
-}
-
 void utils::fatal (std::string error) {
 	if (error != "")
 		std::cout << "GSC-FATAL -> " << error << std::endl;

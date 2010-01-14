@@ -43,6 +43,7 @@ namespace gsc {
 	std::string get_extension (std::string fullName);
 	textureTypeFunc texture_type_find (std::string type);
 	Texture * no_texture_type (std::string location);
+	void texture_type_delete_all();
 }
 
 #endif

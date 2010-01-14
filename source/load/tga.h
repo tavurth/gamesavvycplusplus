@@ -15,16 +15,18 @@
 //     You should have received a copy of the GNU Lesser General Public License
 //     along with GSC.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef GSC_LOAD
-#define GSC_LOAD
+#ifndef GSC_TGA
+#define GSC_TGA
 
-#include "../GSC.h"
-#include "tga.h"
+#include "../../source/GSC.h"
 
 namespace gsc {
-	namespace load {
-		Texture * texture(std::string location);
+
+	namespace tga {
+		Texture * load (std::string location);
+		void init ();
 	}
+
 }
 
 #endif

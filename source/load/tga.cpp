@@ -15,11 +15,12 @@
 //     You should have received a copy of the GNU Lesser General Public License
 //     along with GSC.  If not, see <http://www.gnu.org/licenses/>.
 
-#include "../GSC.h"
+#include "../../source/GSC.h"
+#include "tga.h"
 
 using namespace gsc;
 
-Texture * load::tga (std::string location) {
+Texture * tga::load (std::string location) {
 	#ifdef GSC_DEBUG
 		std::cout << "Loading TGA data from file: " << loc << " . . . " << endl;
 	#endif

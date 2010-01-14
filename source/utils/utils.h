@@ -19,6 +19,7 @@
 #define GSC_UTILS
 
 #include "../GSC.h"
+#include "init.h"
 
 namespace gsc {
 
@@ -29,8 +30,6 @@ namespace gsc {
 		void * c_malloc(size_t size);
 		char * new_str(int size);
 	}
-
-	void quit(int quitCode = 0);
 
 }
 

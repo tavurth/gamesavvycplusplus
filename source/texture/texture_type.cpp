@@ -34,7 +34,7 @@ TextureType::~TextureType () {
 	for (i=textureTypeList.begin(); i < textureTypeList.end(); i++)
 		if (*i == this) {
 			textureTypeList.erase(i);
-			return;
+			break;
 		}
 }
 
@@ -54,17 +54,19 @@ void TextureType::set_name (std::string newName) {
 	name = newName;
 }
 
+//Returns the extension of a passed filename. Example gsc::get_extension("example.tga") returns "tga"
 std::string gsc::get_extension (std::string fullName) {
 	return fullName.substr(fullName.find_last_of(".")+1);
 }
 
+//Function to be called when no texture type has been created
 Texture * gsc::no_texture_type (std::string location) {
 	std::cout << "Sorry, no texture type available for loading texture: " << location << std::endl;
 	return NULL;
 }
 
 //This function returns the correct function for loading a texture <type>
-//Pass in "example.tga" and this function might return 'Texture * (* gsc::load::tga)(std::string location)'
+//Pass in "example.tga" and this function might return the function 'Texture * (* gsc::load::tga)(std::string location)'
 textureTypeFunc gsc::texture_type_find (std::string fullName) {
 	std::string extension = get_extension(fullName);
 
@@ -74,4 +76,13 @@ textureTypeFunc gsc::texture_type_find (std::string fullName) {
 		if (!((*i)->get_name().compare(extension)))
 			return ((*i)->get_function());
 	return &no_texture_type;
+}
+
+void gsc::texture_type_delete_all () {
+	std::vector<TextureType *>::iterator i;
+
+	for (i=textureTypeList.begin(); i < textureTypeList.end(); i++)
+		delete(*i);
+
+	textureTypeList.clear();
 }
