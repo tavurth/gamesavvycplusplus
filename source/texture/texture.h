@@ -46,6 +46,7 @@ namespace gsc {
 	extern GLuint TEXTURE_MAG_FILTER;
 
 	void texture_delete_all();
+	Texture * texture_get(std::string location);
 
 }
 

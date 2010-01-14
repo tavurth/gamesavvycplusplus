@@ -103,7 +103,6 @@ void Texture::erase () {
 
 //Destructor
 Texture::~Texture() {
-	
 	//Delte any data that has not been cleaned up earlier
 	if (data) 
 		free(data);
@@ -116,6 +115,16 @@ Texture::~Texture() {
 
 	//Delete texture from <textureList>
 	this->erase();
+}
+
+//Return a previously loaded texture
+Texture * texture_get (std::string location) {
+	std::vector<Texture *>::iterator i;
+
+	for (i=textureList.begin(); i < textureList.end(); i++)
+		if ((*i)->get_location().compare(location))
+			return *i;
+       return NULL;	
 }
 
 //Delete all textures and clear the texture list
