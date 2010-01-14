@@ -1,6 +1,6 @@
 #! /usr/bin/perl
 
-##		Copyright (c) William Whitty 2009
+##		Copyright (c) William Whitty 2010
 ##
 ##     This file is part of GSC. 
 ##
