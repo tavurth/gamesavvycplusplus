@@ -20,36 +20,66 @@
 my $FLAGS = "-lSDL -lGL -lGLU";
 my $LIBS  = "-g -Wall";
 
+my @C_FILES = `find . -regex \".*.cpp\" -printf "%p\n"`;
+
+$shared = 0;
+$static = 0;
+
+if ($^O eq 'linux') { system("clear"); }
+elsif ($^O eq 'MSWin32') { system("cls"); }
+
+sub check_bin {
+	if ($^O eq 'linux') { `mkdir bin/` if not -d "bin"; } 
+}
+
+sub compile_file_linux ($$) {
+	my $file_name = shift;
+	my $out_name = shift;
+
+	my $command = "g++ $file_name -c -o $out_name \n";
+	print $command;
+	system($command);
+}
+
 sub shared {
-	my $C_FILES = `find . -regex \".*.cpp\" -printf "%p "`;
-	system("clear");
-	my $command = "g++ $C_FILES $FLAGS $LIBS -o GSC.so -shared\n";
+	my $command = "g++ bin/*.o $FLAGS $LIBS -o GSC.so -shared\n";
 	print $command and system($command);
 }
 
 sub static {
-	system("mkdir bin");
-
-	my @C_FILES = `find . -regex ".*.cpp"`;
-	system("clear");
-	foreach (@C_FILES) {
-		chop;
-		m/.*\/(.*)\.cpp/;
-		my $name = $1;
-
-		my $command = "g++ $_ $FLAGS $LIBS -o bin/$name.o -c\n";
-		print $command and system($command);
-	}
-
-	print "\nLinking . . .\n\n";
 	my $command = "ar rc libGSC.a bin/*.o\n";
 	print $command and system($command);
 }
 
-print "Usage: $0 <BUILD-TYPE>\nBUILD TYPES:\n\tshared - compile GSC into a shared library for dynamic runtime linking.
-\tstatic - compile GSC into a static library for compilation linking.\n" and exit unless @ARGV;
+sub compile_linux {
+	foreach $file (@C_FILES) {
+		chomp $file; $file =~ m/.*\/(.*)\.cpp/;
+
+		if (-f "bin/$1.o") {
+			my $out_age  = -M "bin/$1.o";
+			my $file_age = -M $file;
+
+			compile_file_linux($file, "bin/$1.o") if ($out_age > $file_age);
+		}
+
+		else {  compile_file_linux($file, "bin/$1.o"); }
+	}
+
+
+	shared() if ($shared);
+	static() if ($static);
+
+	print "\nBuild complete!\n";
+}
+
+sub compile_files {
+	compile_linux() if ($^O eq 'linux');
+}
 
 while ((my $arg = shift(@ARGV))) {
-	if ($arg =~ "shared")      { shared; }
-	elsif ($arg =~ "static")   { static; }
+	if ($arg =~ "shared")      { $shared = 1; }
+	elsif ($arg =~ "static")   { $static = 1; }
 }
+
+check_bin();
+compile_files();
