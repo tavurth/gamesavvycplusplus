@@ -19,7 +19,7 @@
 #define GSC
 
 #include "includes.h"
-#include "structs.h"
+#include "classes.h"
 #include "namespaces.h"
 #include "misc.h"
 

@@ -15,7 +15,15 @@
 //     You should have received a copy of the GNU Lesser General Public License
 //     along with GSC.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef GSC_STRUCTS
-#define GSC_STRUCTS
+#ifndef GSC_CLASSES
+#define GSC_CLASSES
+
+namespace gsc {
+	class Point_2d;
+	class Velocity_2d;
+
+	class Texture;
+	class TextureType;
+}
 
 #endif

@@ -36,7 +36,7 @@ sub compile_file_linux ($$) {
 	my $file_name = shift;
 	my $out_name = shift;
 
-	my $command = "g++ $file_name -c -o $out_name \n";
+	my $command = "g++ $LIBS $file_name -c -o $out_name \n";
 	print $command and `$command`;
 }
 

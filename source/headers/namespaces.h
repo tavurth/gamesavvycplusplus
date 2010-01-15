@@ -18,6 +18,8 @@
 #ifndef GSC_NAMESPACES
 #define GSC_NAMESPACES
 
+#include "classes.h"
+
 //Texture
 #include "../texture/texture.h"
 #include "../texture/texture_type.h"
@@ -28,5 +30,9 @@
 #include "../utils/utils.h"
 #include "../draw/draw.h"
 #include "../load/load.h"
+
+//Coords
+#include "../misc/coords/point_2d/point_2d.h"
+#include "../misc/coords/velocity_2d/velocity_2d.h"
 
 #endif

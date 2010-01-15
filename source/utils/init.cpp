@@ -25,6 +25,8 @@ void gsc::init_texture_types () {
 
 void gsc::init () {
 	init_texture_types();
+
+	timeline::init();
 }
 
 void gsc::quit (int quitCode) {
