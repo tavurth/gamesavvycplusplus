@@ -37,18 +37,17 @@ sub compile_file_linux ($$) {
 	my $out_name = shift;
 
 	my $command = "g++ $file_name -c -o $out_name \n";
-	print $command;
-	system($command);
+	print $command and `$command`;
 }
 
 sub shared {
 	my $command = "g++ bin/*.o $FLAGS $LIBS -o GSC.so -shared\n";
-	print $command and system($command);
+	print $command and `$command`;
 }
 
 sub static {
 	my $command = "ar rc libGSC.a bin/*.o\n";
-	print $command and system($command);
+	print $command and `$command`;
 }
 
 sub compile_linux {

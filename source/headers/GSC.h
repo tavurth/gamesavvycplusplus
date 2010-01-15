@@ -18,9 +18,9 @@
 #ifndef GSC
 #define GSC
 
-#include "headers/includes.h"
-#include "headers/structs.h"
-#include "headers/namespaces.h"
-#include "headers/misc.h"
+#include "includes.h"
+#include "structs.h"
+#include "namespaces.h"
+#include "misc.h"
 
 #endif

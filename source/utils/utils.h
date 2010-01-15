@@ -18,7 +18,7 @@
 #ifndef GSC_UTILS
 #define GSC_UTILS
 
-#include "../GSC.h"
+#include "../headers/GSC.h"
 #include "init.h"
 
 namespace gsc {

@@ -18,7 +18,7 @@
 #ifndef GSC_TGA
 #define GSC_TGA
 
-#include "../../source/GSC.h"
+#include "../../source/headers/GSC.h"
 
 namespace gsc {
 

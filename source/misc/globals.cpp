@@ -15,6 +15,6 @@
 //     You should have received a copy of the GNU Lesser General Public License
 //     along with GSC.  If not, see <http://www.gnu.org/licenses/>.
 
-#include "../GSC.h"
+#include "../headers/GSC.h"
 
 using namespace gsc;

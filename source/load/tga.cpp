@@ -15,7 +15,7 @@
 //     You should have received a copy of the GNU Lesser General Public License
 //     along with GSC.  If not, see <http://www.gnu.org/licenses/>.
 
-#include "../../source/GSC.h"
+#include "../../source/headers/GSC.h"
 #include "tga.h"
 
 using namespace gsc;

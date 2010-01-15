@@ -1,4 +1,4 @@
-#include "../GSC.h"
+#include "../headers/GSC.h"
 
 using namespace gsc;
 

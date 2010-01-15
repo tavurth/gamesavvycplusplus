@@ -18,7 +18,7 @@
 #ifndef GSC_DRAW
 #define GSC_DRAW
 
-#include "../GSC.h"
+#include "../headers/GSC.h"
 
 namespace gsc {
 

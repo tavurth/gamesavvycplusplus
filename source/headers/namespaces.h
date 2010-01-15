@@ -18,8 +18,13 @@
 #ifndef GSC_NAMESPACES
 #define GSC_NAMESPACES
 
+//Texture
 #include "../texture/texture.h"
 #include "../texture/texture_type.h"
+
+//Timeline
+#include "../timeline/timeline.h"
+
 #include "../utils/utils.h"
 #include "../draw/draw.h"
 #include "../load/load.h"

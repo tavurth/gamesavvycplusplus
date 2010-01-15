@@ -18,7 +18,7 @@
 #ifndef GSC_GLOBALS
 #define GSC_GLOBALS
 
-#include "../GSC.h"
+#include "../headers/GSC.h"
 
 namespace gsc {
 

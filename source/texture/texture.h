@@ -18,7 +18,7 @@
 #ifndef GSC_TEXTURE
 #define GSC_TEXTURE
 
-#include "../GSC.h"
+#include "../headers/GSC.h"
 
 namespace gsc {
 
