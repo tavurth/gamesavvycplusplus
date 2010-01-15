@@ -75,10 +75,22 @@ sub compile_files {
 	compile_linux() if ($^O eq 'linux');
 }
 
-while ((my $arg = shift(@ARGV))) {
-	if ($arg =~ "shared")      { $shared = 1; }
-	elsif ($arg =~ "static")   { $static = 1; }
+sub clean {
+	if ($^O eq 'linux') { 
+		my $command = "rm -rf bin GSC.so GSC.a\n";
+		print $command and `$command`;
+	}
+
+	print "\nCleanup complete!\n";
 }
 
-check_bin();
-compile_files();
+while ((my $arg = shift(@ARGV))) {
+	if    ($arg =~ "shared")   { $shared = 1; }
+	elsif ($arg =~ "static")   { $static = 1; }
+	elsif ($arg =~ "clean" )   { clean(); }
+}
+
+if ($shared or $static) {
+	check_bin();
+	compile_files();
+}
