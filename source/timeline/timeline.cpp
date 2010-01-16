@@ -38,6 +38,7 @@ void timeline::add_event (Event * newEvent) {
 
 void timeline::update () {
 	currentTime += 0.01;
+	std::cout << currentTime << std::endl;
 
 	if (timeline.size() < 1)
 		return;
@@ -45,7 +46,7 @@ void timeline::update () {
 	Event * current;
 
 	while (timeline.size() > 0 && (current = timeline.front())->get_time() <= currentTime) {
-		(* current->get_function())();
+		current->call();
 		timeline.pop_front();
 	}
 }

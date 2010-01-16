@@ -17,8 +17,8 @@
 ##     You should have received a copy of the GNU Lesser General Public License
 ##     along with GSC.  If not, see <http://www.gnu.org/licenses/>.
 
-my $FLAGS = "-lSDL -lGL -lGLU";
-my $LIBS  = "-g -Wall";
+my $LIBS  = "-lSDL -lGL -lGLU";
+my $FLAGS = "-g -Wall";
 
 my @C_FILES = `find . -regex \".*.cpp\" -printf "%p\n"`;
 
@@ -36,7 +36,7 @@ sub compile_file_linux ($$) {
 	my $file_name = shift;
 	my $out_name = shift;
 
-	my $command = "g++ $LIBS $file_name -c -o $out_name \n";
+	my $command = "g++ $FLAGS $file_name -c -o $out_name \n";
 	print $command and `$command`;
 }
 

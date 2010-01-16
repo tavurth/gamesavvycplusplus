@@ -25,5 +25,6 @@
 #include <vector>
 #include <fstream>
 #include <list>
+#include <math.h>
 
 #endif

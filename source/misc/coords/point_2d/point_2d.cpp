@@ -49,3 +49,8 @@ double Point_2d::get_x() const {
 double Point_2d::get_y() const {
 	return y;
 } 
+
+double Point_2d::get_dist(Point_2d * p2) const {
+	double x2 = p2->get_x(), y2 = p2->get_y();
+	return sqrt(((x2 - x) * (x2 - x)) + ((y2 - y) * (y2 - y)));
+}

@@ -35,6 +35,8 @@ namespace gsc {
 
 			double get_x() const;
 			double get_y() const;
+
+			double get_dist(Point_2d * p2) const;
 	};
 }
 

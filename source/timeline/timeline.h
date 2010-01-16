@@ -22,23 +22,29 @@
 
 namespace gsc {
 	namespace timeline {
-		typedef void (*eventFunc)(void);
+		typedef void (*eventFunc)(void *);
 
 		class Event {
 			protected:
 				double time;
 				eventFunc function;
+				void * data;
+
 				void erase();
 
 			public:
-				Event(double newTime, eventFunc newEventFunc);
+				Event(double newTime, eventFunc newEventFunc, void * newData = NULL);
 				~Event();
 
 				void set_function(eventFunc newEventFunc);
+				void set_data(void * newData);
 				void set_time(double time);
 
 				eventFunc get_function() const;
+				void * get_data() const;
 				double get_time() const;
+
+				void call() const;
 		};
 
 		extern std::list<Event *> timeline;

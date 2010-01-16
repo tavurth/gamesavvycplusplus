@@ -20,8 +20,8 @@
 using namespace gsc;
 using namespace timeline;
 
-Event::Event(double newTime, eventFunc newEventFunc) {
-	time = newTime; function = newEventFunc;
+Event::Event(double newTime, eventFunc newEventFunc, void * newData) {
+	time = newTime; function = newEventFunc; data = newData;
 
 	timeline::add_event(this);
 }
@@ -42,6 +42,10 @@ void Event::set_function(eventFunc newEventFunc) {
 	function = newEventFunc;
 }
 
+void Event::set_data(void * newData) {
+	data = newData;
+}
+
 void Event::set_time(double newTime) {
 	time = newTime;
 }
@@ -50,6 +54,14 @@ eventFunc Event::get_function() const {
 	return function;
 }
 
+void * Event::get_data() const {
+	return data;
+}
+
 double Event::get_time() const {
 	return time;
+}
+
+void Event::call () const {
+	(* function)(data);
 }
