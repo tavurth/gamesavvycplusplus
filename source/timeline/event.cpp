@@ -21,7 +21,7 @@ using namespace gsc;
 using namespace timeline;
 
 Event::Event(double newTime, eventFunc newEventFunc, void * newData) {
-	time = newTime; function = newEventFunc; data = newData;
+	time = timeline::currentTime + newTime; function = newEventFunc; data = newData;
 
 	timeline::add_event(this);
 }
