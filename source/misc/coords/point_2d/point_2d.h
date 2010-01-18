@@ -37,6 +37,9 @@ namespace gsc {
 			double get_y() const;
 
 			double get_dist(Point_2d * p2) const;
+
+			bool   in_radius(Point_2d * p2, int radius) const;
+			bool   in_rect(int x1, int y1, int w, int h) const;
 	};
 }
 
