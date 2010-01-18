@@ -33,7 +33,10 @@ namespace gsc {
 			int depth;
 			Node * nodeList[4];
 			std::vector<ContentType> contents;
-			bool point_inside(Point_2d * p) const { return p->in_rect(x, y, w, h); }
+
+			//Returns true if {Point_2d} <p> is within the borders of <this>
+			bool contains_point(Point_2d * p) const { return p->in_rect(x, y, w, h); }
+
 			void populate_node_list() {
 				//Populates the node list with new nodes
 				int wDiv2 = w/2;
@@ -43,6 +46,10 @@ namespace gsc {
 				nodeList[1] = new Node(x + wDiv2, y,	     wDiv2, hDiv2, depth+1);
 				nodeList[2] = new Node(x + wDiv2, y + hDiv2, wDiv2, hDiv2, depth+1);
 				nodeList[3] = new Node(x,	  y + hDiv2, wDiv2, hDiv2, depth+1);
+			}
+
+			void delete_content(QuadtreeLocation location) {
+				contents.erase(location);
 			}
 
 			public:
@@ -70,12 +77,15 @@ namespace gsc {
 						return contents.end();
 					}
 
-					//Else search until we find the correct branch 
+					//Intialise the nodeList if not already done
 					if (nodeList[0] = NULL)
 						populate_node_list();
 
+					//Search until we find the correct child node
 					for (int i=0; i < 4; i++)
-						if (nodeList[i]->point_inside(p))
+						//If the point is inside <node> nodeList[i]
+						if (nodeList[i]->contains_point(p))
+							//Sort the point inside nodeList[i]
 							nodeList[i]->sort_point(p, size);
 				}
 		};
@@ -96,9 +106,21 @@ namespace gsc {
 
 				//Sort {Point_2d} <p> into the current tree
 				QuadtreePointer<ContentType> * sort(Point_2d * p, int size, QuadtreePointer<ContentType> * currentPos = NULL) {
-					QuadtreeLocation newLocation = contents.push_back(Node<ContentType>::sort(p, size, maxDepth));
+					//If we have already sorted this point before
+					if (currentPos){
+						Node<ContentType> * node = currentPos->get_node();
+						//If the point is still in the same node, do nothing
+						if (node->contains_point(p))
+							return;
 
-					return new QuadtreePointer<ContentType>(this, newLocation);
+						//Else: delete the content from the node and re-sort
+						node->delete_content(currentPos->get_location());
+						currentPos->set_location(Node<ContentType>::sort(p, size, maxDepth));
+					}
+					else {
+						QuadtreeLocation newLocation = contents.push_back(Node<ContentType>::sort(p, size, maxDepth));
+						return new QuadtreePointer<ContentType>(this, newLocation);
+					}
 				}
 		};
 
@@ -117,11 +139,13 @@ namespace gsc {
 					location = newLocation;
 				}
 
-				void set_tree_location(QuadtreeLocation newLocation) { location = newLocation; }
+				void set_location(QuadtreeLocation newLocation) { location = newLocation; }
 				void set(Quadtree<ContentType> * newTree) { tree = newTree; }
+				void set_node(Node<ContentType> * newNode) { node = newNode; }
 
 				QuadtreeLocation get_tree_location() const { return location; }
 				Quadtree<ContentType> * get() const { return tree; }
+				Node<ContentType> * get_node() const { return node; }
 		};
 }
 
