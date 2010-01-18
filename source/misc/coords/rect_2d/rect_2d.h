@@ -15,32 +15,34 @@
 //     You should have received a copy of the GNU Lesser General Public License
 //     along with GSC.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef GSC_POINT_2D 
-#define GSC_POINT_2D
+#ifndef GSC_RECT_2D
+#define GSC_RECT_2D
 
 #include "../../../headers/GSC.h"
 
 namespace gsc {
-	class Point_2d {
+	class Rect_2d {
 		protected:
-			double x, y;
+			Point_2d * p1, * p2;
+			double width, height;
+
 		public:
-			Point_2d();
-			Point_2d(double newX, double newY);
-			~Point_2d();
+			Rect_2d (double newX, double newY, double newW, double newH);
+			~Rect_2d ();
 
-			void set(double, double);
-			void set_x(double);
-			void set_y(double);
+			void set_p1(Point_2d * newP);
+			void set_p2(Point_2d * newP);
+			void set_width(double newWidth);
+			void set_height(double newHeight);
 
-			double get_x() const;
-			double get_y() const;
-
-			double get_dist(Point_2d * p2) const;
-
-			bool   in_radius(Point_2d * p2, double radius) const;
-			bool   in_rect(Rect_2d * r) const;
-			bool   in_rect(double x1, double y1, double w, double h) const;
+			Point_2d * get_p1() const;
+			Point_2d * get_p2() const;
+			double     get_x() const;
+			double     get_x2() const;
+			double     get_y() const;
+			double     get_y2() const;
+			double	   get_width() const;
+			double	   get_height() const;
 	};
 }
 

@@ -35,6 +35,7 @@
 
 //Coords
 #include "../misc/coords/point_2d/point_2d.h"
+#include "../misc/coords/rect_2d/rect_2d.h"
 #include "../misc/coords/velocity_2d/velocity_2d.h"
 
 #endif

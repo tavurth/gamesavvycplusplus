@@ -1,3 +1,4 @@
+
 //		Copyright (c) William Whitty 2010
 //
 //     This file is part of GSC. 
@@ -38,10 +39,14 @@ double Point_2d::get_dist(Point_2d * p2) const {
 	return sqrt(((x2 - x) * (x2 - x)) + ((y2 - y) * (y2 - y)));
 }
 
-bool Point_2d::in_radius(Point_2d * p2, int radius) const {
+bool Point_2d::in_radius(Point_2d * p2, double radius) const {
 	return (get_dist(p2) < radius);
 }
 
-bool Point_2d::in_rect(int x1, int y1, int w, int h) const {
-	return ((x > x1 && x < (x1 + w)) && (y > y1 && y < (y1 + h)));
+bool Point_2d::in_rect(double x1, double y1, double w, double h) const {
+	return ((x >= x1 && x <= (x1 + w)) && (y >= y1 && y <= (y1 + h)));
+}
+
+bool Point_2d::in_rect(Rect_2d * r) const {
+	return ((x >= r->get_x() && x <= r->get_x2()) && (y >= r->get_y() && y <= r->get_y2()));
 }

@@ -20,6 +20,7 @@
 
 namespace gsc {
 	class Point_2d;
+	class Rect_2d;
 	class Velocity_2d;
 
 	class Texture;
