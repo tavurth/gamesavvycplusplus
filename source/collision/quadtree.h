@@ -127,13 +127,11 @@ namespace gsc {
 	template <class ContentType>
 		class Quadtree : public Node<ContentType> {
 			protected:
-				std::vector<ContentType> * contents;
 				int maxDepth;
 
 			public:
 				Quadtree(int newX, int newY, int newW, int newH, int newMax = 5) 
 					: Node<ContentType>(newX, newY, newW, newH, 0, this) { maxDepth = newMax; }
-				std::vector<ContentType> * get_contents() { return contents; }
 
 				void set_max_depth (int newMax) { maxDepth = newMax; }
 				int  get_max_depth() const      { return maxDepth; }
