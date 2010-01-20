@@ -28,22 +28,66 @@ namespace gsc {
 			private:
 				typedef typename std::vector<ContentType>::iterator QuadtreeLocation;
 				int depth;
-				Node * nodeList[4];
+				Node * nodeList[4], * parent;
 				std::vector<ContentType> contents;
 
 			public:
-				Node(double newX, double newY, double newW, double newH, int newDepth) : Rect_2d(newX, newY, newW, newH) {
+				Node(double newX, double newY, double newW, double newH, int newDepth, Node<ContentType> * newParent) 
+					: Rect_2d(newX, newY, newW, newH) {
 					for (int i=0; i < 4; i++)
 						nodeList[i] = NULL;
 					depth = newDepth;
+					parent = newParent;
 				}
 
 				int get_depth() const { return depth; }
+
+				Node<ContentType> * get_parent() const { return parent; }
+				void set_parent(Node<ContentType> * newParent) { parent = newParent; }
+
 				std::vector<ContentType> * get_contents() { return &contents; }
 				void add(ContentType t) { contents.push_back(t); }
 
 				//Returns true if {Point_2d} <p> is within the borders of <this>
 				bool contains_point(Point_2d * p) { return p->in_rect(this); }
+
+				std::vector<std::vector<ContentType> *> get_close_up () {
+					std::vector<std::vector<ContentType> *> close, temp;
+
+					if (depth > 0 && parent != NULL)
+						if ((temp = parent->get_close_up()).size() > 0)
+							close.insert(close.end(), temp.begin(), temp.end());
+					return close;
+				}
+
+				std::vector<std::vector<ContentType> *> get_close_down () {
+					std::vector<std::vector<ContentType> *> close, temp;
+
+					for (int i=0; i < 4; i++)
+						if (nodeList[i])
+							if ((temp = nodeList[i]->get_close_down()).size() > 0)
+								close.insert(close.end(), temp.begin(), temp.end());
+
+					return close;
+				}
+
+				std::vector<std::vector<ContentType> *> get_close () {
+					std::vector<std::vector<ContentType> *> close, temp;
+
+					//Get contents that are close above us in the tree
+					temp = get_close_up();
+					close.insert(close.end(), temp.begin(), temp.end());
+
+					//Get contents that are close below us in the tree
+					temp = get_close_down();
+					close.insert(close.end(), temp.begin(), temp.end());
+
+					//Add the contents of <this> node
+					if (contents.size() > 0)
+						close.push_back(&contents);
+
+					return close;
+				}
 
 				void populate_node_list() {
 					//Populates the node list with new nodes
@@ -52,10 +96,10 @@ namespace gsc {
 					double wDiv2 = width/2;
 					double hDiv2 = height/2;
 
-					nodeList[0] = new Node(x,         y,	     wDiv2, hDiv2, depth+1);
-					nodeList[1] = new Node(x + wDiv2, y,	     wDiv2, hDiv2, depth+1);
-					nodeList[2] = new Node(x + wDiv2, y + hDiv2, wDiv2, hDiv2, depth+1);
-					nodeList[3] = new Node(x,	  y + hDiv2, wDiv2, hDiv2, depth+1);
+					nodeList[0] = new Node(x,         y,	     wDiv2, hDiv2, depth+1, this);
+					nodeList[1] = new Node(x + wDiv2, y,	     wDiv2, hDiv2, depth+1, this);
+					nodeList[2] = new Node(x + wDiv2, y + hDiv2, wDiv2, hDiv2, depth+1, this);
+					nodeList[3] = new Node(x,	  y + hDiv2, wDiv2, hDiv2, depth+1, this);
 				}
 
 				Node<ContentType> * sort(Point_2d * p, double size = 1, int maxDepth = 5) {
@@ -88,8 +132,8 @@ namespace gsc {
 
 			public:
 				Quadtree(int newX, int newY, int newW, int newH, int newMax = 5) 
-					: Node<ContentType>(newX, newY, newW, newH, 0) { maxDepth = newMax; }
-				std::vector<ContentType> * get_contents() { return &contents; }
+					: Node<ContentType>(newX, newY, newW, newH, 0, this) { maxDepth = newMax; }
+				std::vector<ContentType> * get_contents() { return contents; }
 
 				void set_max_depth (int newMax) { maxDepth = newMax; }
 				int  get_max_depth() const      { return maxDepth; }
@@ -119,7 +163,7 @@ namespace gsc {
 					node = newNode;
 				}
 
-				void remove_content () {
+				void clean () {
 					ContentIterator it;
 					std::vector<ContentType> * contents = node->get_contents();
 
@@ -128,15 +172,20 @@ namespace gsc {
 							contents->erase(it);
 							return;
 						}
+
+					tree = NULL;
+					node = NULL;
 				}
 
-				~QuadtreePointer () { remove_content(); }
+				~QuadtreePointer () { clean(); }
+
+				std::vector<std::vector<ContentType> *> get_close () { return node->get_close(); }
 
 				QuadtreePointer<ContentType> * update_point(Point_2d * p, int size) {
 					if (node->contains_point(p))
 						return this;
 
-					remove_content();
+					clean();
 					node = tree->Node<ContentType>::sort(p, size, tree->get_max_depth());
 
 					return this;
