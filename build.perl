@@ -20,7 +20,7 @@
 my $LIBS  = "-lSDL -lGL -lGLU";
 my $FLAGS = "-ansi -Wall";
 
-my @C_FILES = `find . -regex \".*.cpp\" -printf "%p\n"`;
+my @C_FILES = `find source/ -regex \".*.cpp\" -printf "%p\n"`;
 
 $shared = 0;
 $static = 0;

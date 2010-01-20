@@ -20,7 +20,7 @@
 
 #include "classes.h"
 
-#include "../collision/quadtree/quadtree.h"
+#include "../collision/quadtree.h"
 
 //Texture
 #include "../texture/texture.h"
