@@ -25,7 +25,7 @@
 namespace gsc {
 	template <class ContentType>
 		class Node : public Rect_2d {
-			private:
+			protected:
 				typedef typename std::vector<ContentType>::iterator QuadtreeLocation;
 				int depth;
 				Node * nodeList[4], * parent;
@@ -50,6 +50,16 @@ namespace gsc {
 
 				//Returns true if {Point_2d} <p> is within the borders of <this>
 				bool contains_point(Point_2d * p) { return p->in_rect(this); }
+
+				void erase () {
+					QuadtreeLocation it;
+
+					for (int i=0; i < 4; i++)
+						if (nodeList[i])
+							nodeList[i]->erase();
+
+					contents.clear();
+				}
 
 				std::vector<std::vector<ContentType> *> get_close_up () {
 					std::vector<std::vector<ContentType> *> close, temp;
@@ -133,7 +143,12 @@ namespace gsc {
 				Quadtree(int newX, int newY, int newW, int newH, int newMax = 5) 
 					: Node<ContentType>(newX, newY, newW, newH, 0, this) { maxDepth = newMax; }
 
-				void set_max_depth (int newMax) { maxDepth = newMax; }
+				~Quadtree() {
+					for (int i=0; i < 4; i++)
+						Node<ContentType>::nodeList[i]->erase();
+				}
+
+				void set_max_depth(int newMax) { maxDepth = newMax; }
 				int  get_max_depth() const      { return maxDepth; }
 
 				QuadtreePointer<ContentType> * sort(Point_2d * p, double size = 1, 
