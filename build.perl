@@ -18,7 +18,7 @@
 ##     along with GSC.  If not, see <http://www.gnu.org/licenses/>.
 
 my $LIBS  = "-lSDL -lGL -lGLU";
-my $FLAGS = "-ansi -Wall";
+my $FLAGS = "-Wall";
 
 my @C_FILES = `find source/ -regex \".*.cpp\" -printf "%p\n"`;
 

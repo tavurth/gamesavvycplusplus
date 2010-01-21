@@ -20,10 +20,7 @@
 
 using namespace gsc;
 
-Point_2d::Point_2d() {
-	x = y = 0;
-}
-
+Point_2d::Point_2d() { x = y = 0; }
 Point_2d::Point_2d(double newX, double newY) { x = newX; y = newY; }
 Point_2d::~Point_2d() { }
 
@@ -44,9 +41,9 @@ bool Point_2d::in_radius(Point_2d * p2, double radius) const {
 }
 
 bool Point_2d::in_rect(double x1, double y1, double w, double h) const {
-	return ((x >= x1 && x <= (x1 + w)) && (y >= y1 && y <= (y1 + h)));
+	return ((x >= x1 && x < (x1 + w)) && (y >= y1 && y < (y1 + h)));
 }
 
 bool Point_2d::in_rect(Rect_2d * r) const {
-	return ((x >= r->get_x() && x <= r->get_x2()) && (y >= r->get_y() && y <= r->get_y2()));
+	return in_rect(r->get_x(), r->get_y(), r->get_x2(), r->get_y2());
 }

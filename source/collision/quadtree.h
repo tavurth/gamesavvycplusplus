@@ -116,7 +116,7 @@ namespace gsc {
 					//If the object is too big for the next level of the tree save it here
 					if (depth >= maxDepth || size > width / 2.0 || size > height / 2.0)
 						return this;
-					
+
 					//Intialise the nodeList if not already done
 					if (nodeList[0] == NULL)
 						populate_node_list();
@@ -157,7 +157,12 @@ namespace gsc {
 					if (currentPosition)
 						return currentPosition->update_point(p, size);
 
-					return new QuadtreePointer<ContentType>(this, Node<ContentType>::sort(p, size, maxDepth));
+					Node<ContentType> * temp; 
+
+					if ((temp = Node<ContentType>::sort(p, size, maxDepth)))
+						return new QuadtreePointer<ContentType>(this, temp);
+
+					return NULL;
 				}
 		};
 
