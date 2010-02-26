@@ -21,7 +21,18 @@
 #include "../headers/GSC.h"
 
 namespace gsc {
+	extern Uint8 * keys;
 
+	extern int SCREEN_WIDTH;
+	extern int SCREEN_HEIGHT;
+	extern int SCREEN_BPP;
+	extern int SCREEN_FOV;
+	extern int SCREEN_ASPECT_NEAR;
+	extern int SCREEN_ASPECT_FAR;
+
+	extern int IS_RUNNING;
+
+	extern void init_globals();
 }
 
 #endif

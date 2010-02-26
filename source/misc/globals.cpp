@@ -18,3 +18,27 @@
 #include "../headers/GSC.h"
 
 using namespace gsc;
+
+Uint8 * gsc::keys;
+
+int gsc::SCREEN_WIDTH;
+int gsc::SCREEN_HEIGHT;
+int gsc::SCREEN_BPP;
+int gsc::SCREEN_FOV;
+int gsc::SCREEN_ASPECT_NEAR;
+int gsc::SCREEN_ASPECT_FAR;
+
+int gsc::IS_RUNNING;
+
+void gsc::init_globals() {
+	gsc::keys = SDL_GetKeyState(NULL);
+
+	gsc::SCREEN_WIDTH		= 1024;
+	gsc::SCREEN_HEIGHT		= 512;
+	gsc::SCREEN_BPP			= 32;
+	gsc::SCREEN_FOV			= 90;
+	gsc::SCREEN_ASPECT_NEAR		= 0.1;
+	gsc::SCREEN_ASPECT_FAR		= 10000;
+
+	gsc::IS_RUNNING			= 1;
+}

@@ -23,10 +23,35 @@ void gsc::init_texture_types () {
 	new TextureType("tga", &tga::load);
 }
 
-void gsc::init () {
+void init_perspective () {
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	gluPerspective(gsc::SCREEN_FOV, gsc::SCREEN_WIDTH/gsc::SCREEN_HEIGHT, gsc::SCREEN_ASPECT_NEAR, gsc::SCREEN_ASPECT_FAR);
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+}
+
+int gsc::init (int argc, char ** argv) {
+	if (SDL_Init(SDL_INIT_VIDEO) < 0)
+		return 1;
+
+	init_globals();
+
+	if (SDL_SetVideoMode(gsc::SCREEN_WIDTH, gsc::SCREEN_HEIGHT, gsc::SCREEN_BPP, SDL_OPENGL) == NULL)
+		return 1;
+
+	init_perspective();
 	init_texture_types();
+	glEnable(GL_BLEND);
+	glEnable(GL_TEXTURE_2D);
 
 	timeline::init();
+	
+	return 0;
+}
+
+int gsc::init () {
+	return init(0, NULL);
 }
 
 void gsc::quit (int quitCode) {

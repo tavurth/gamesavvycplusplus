@@ -45,3 +45,33 @@ void * utils::c_malloc(size_t size)
 char * utils::new_str(int n) {
 	return (char *) c_malloc(sizeof(char) * (n + 2));
 }
+
+std::vector<std::string> utils::get_file_text (const char * location) {
+	std::ifstream in (location);
+	std::vector<std::string> lines;
+	char temp[2048];
+
+	if (in.is_open())
+		while (!in.eof()) {
+			in.getline(temp, 2048, '\n');
+			lines.push_back(temp);
+		}
+	else
+		std::cout << "Could not open file " << location << "." << std::endl;
+
+	return lines;
+}
+
+std::vector<std::string> utils::get_file_text (const std::string location) {
+	return get_file_text(location.c_str());
+}
+
+#define twoPI (M_PI * 2)
+
+double utils::to_degrees(double radians) {
+	return (radians / twoPI) * 360.0;
+}
+
+double utils::to_radians(double degrees) {
+	return (degrees / 360.0) * twoPI;
+}

@@ -28,6 +28,12 @@ void Point_2d::set(double newX, double newY) { x = newX; y = newY; }
 void Point_2d::set_x(double newX) 	     { x = newX; }
 void Point_2d::set_y(double newY) 	     { y = newY; }
 
+void Point_2d::incf_x(double amount)	     { x += amount; }
+void Point_2d::incf_y(double amount)	     { y += amount; }
+
+void Point_2d::decf_x(double amount)	     { x -= amount; }
+void Point_2d::decf_y(double amount)	     { y -= amount; }
+
 double Point_2d::get_x() const { return x; }
 double Point_2d::get_y() const { return y; }
 

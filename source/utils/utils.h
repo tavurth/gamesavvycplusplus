@@ -29,6 +29,12 @@ namespace gsc {
 		void   fatal();
 		void * c_malloc(size_t size);
 		char * new_str(int size);
+
+		std::vector<std::string> get_file_text (const std::string location);
+		std::vector<std::string> get_file_text (const char * location);
+
+		double to_degrees(double radians);
+		double to_radians(double degrees);
 	}
 
 }

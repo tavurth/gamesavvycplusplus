@@ -30,12 +30,15 @@
 #include "../timeline/timeline.h"
 
 #include "../utils/utils.h"
+#include "../utils/config.h"
 #include "../draw/draw.h"
 #include "../load/load.h"
 
 //Coords
 #include "../misc/coords/point_2d/point_2d.h"
+#include "../misc/coords/point_3d/point_3d.h"
 #include "../misc/coords/rect_2d/rect_2d.h"
-#include "../misc/coords/velocity_2d/velocity_2d.h"
+#include "../misc/coords/vector_2d/vector_2d.h"
+#include "../misc/coords/vector_3d/vector_3d.h"
 
 #endif

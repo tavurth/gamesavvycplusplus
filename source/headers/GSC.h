@@ -20,6 +20,7 @@
 
 #include "includes.h"
 #include "classes.h"
+#include "globals.h"
 #include "namespaces.h"
 #include "misc.h"
 

@@ -33,6 +33,12 @@ namespace gsc {
 			void set_x(double);
 			void set_y(double);
 
+			void incf_x(double);
+			void incf_y(double);
+
+			void decf_x(double);
+			void decf_y(double);
+
 			double get_x() const;
 			double get_y() const;
 
