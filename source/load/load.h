@@ -23,7 +23,7 @@
 
 namespace gsc {
 	namespace load {
-		Texture * texture(std::string location);
+		Texture * texture(std::string location, int initialise = 1);
 	}
 }
 

@@ -78,7 +78,7 @@ void Texture::setup_parameters () {
 }
 
 //Initialise a texture (Create OpenGL id etc)
-void Texture::initialise() {
+Texture * Texture::initialise() {
 	glGenTextures(1, (GLuint *) &id);
 	glBindTexture(GL_TEXTURE_2D, id);
 
@@ -90,6 +90,8 @@ void Texture::initialise() {
 	
 	//Check that the texture has been created properly
 	this->check();
+
+	return this;
 }
 
 //Free any data that is saved in the texture
@@ -102,6 +104,15 @@ void Texture::free_data() {
 Texture::Texture () {
 	data = NULL;
 	width = height = bpp = id = format = error = 0;
+	textureList.push_back(this);
+}
+
+//Constructor
+Texture::Texture (int newWidth, int newHeight, int newBpp) {
+	data = NULL;
+	width 	= newWidth;
+	height 	= newHeight;
+	bpp 	= newBpp;
 	textureList.push_back(this);
 }
 

@@ -15,16 +15,34 @@
 //     You should have received a copy of the GNU Lesser General Public License
 //     along with GSC.  If not, see <http://www.gnu.org/licenses/>.
 
-#include "../headers/GSC.h"
+#ifndef GSC_POINT_3D 
+#define GSC_POINT_3D
 
-using namespace gsc;
+#include "../../../headers/GSC.h"
 
-Texture * load::texture (std::string location, int initialise) {
-	Texture * temp = (* texture_type_find(location))(location);
-	//Intialise the texture (Create OpenGL ID etc)
-	temp->initialise();
-	//Freeing our texture data as we no longer require it.
-	temp->free_data();
+namespace gsc {
+	class Point_3d : public Point_2d {
+		protected:
+			double z;
+		public:
+			Point_3d();
+			Point_3d(double newX, double newY = 0, double newZ = 0);
+			~Point_3d();
 
-	return temp;
+			void set(double, double, double);
+			void set_z(double);
+
+			void incf_z(double);
+			void decf_z(double);
+
+			double get_z() const;
+
+			double get_dist(Point_3d * p2) const;
+
+			bool   in_radius(Point_3d * p2, double radius) const;
+			bool   in_rect(Rect_2d * r) const;
+			bool   in_rect(double x1, double y1, double w, double h) const;
+	};
 }
+
+#endif

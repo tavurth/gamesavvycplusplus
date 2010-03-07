@@ -33,8 +33,9 @@ namespace gsc {
 
 		public:
 			Texture();
+			Texture (int newWidth, int newHeight, int newBpp);
 			~Texture();
-			void initialise();
+			Texture * initialise();
 			void free_data();
 			void erase();
 

@@ -72,12 +72,6 @@ Texture * tga::load (std::string location) {
 	texture->set_data(data);
 	texture->set_format(GL_BGRA);
 
-	//Intialise the texture (Create OpenGL ID etc)
-	texture->initialise();
-
-	//Freeing our texture data as we no longer require it.
-	texture->free_data();
-
 	#ifdef GSC_DEBUG
 		std::cout << "Done.\n" << endl;
 	#endif

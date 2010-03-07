@@ -15,16 +15,28 @@
 //     You should have received a copy of the GNU Lesser General Public License
 //     along with GSC.  If not, see <http://www.gnu.org/licenses/>.
 
-#include "../headers/GSC.h"
+#ifndef GSC_VECTOR_3D 
+#define GSC_VECTOR_3D
 
-using namespace gsc;
+#include "../../../headers/GSC.h"
 
-Texture * load::texture (std::string location, int initialise) {
-	Texture * temp = (* texture_type_find(location))(location);
-	//Intialise the texture (Create OpenGL ID etc)
-	temp->initialise();
-	//Freeing our texture data as we no longer require it.
-	temp->free_data();
+namespace gsc {
+	class Vector_3d : public Vector_2d {
+		protected:
+			double vZ;
+		public:
+			Vector_3d();
+			Vector_3d(double newVX, double newVY, double newVZ);
+			~Vector_3d();
 
-	return temp;
+			void set(double, double, double);
+			void set_vZ(double);
+
+			void incf_vZ(double);
+			void decf_vZ(double);
+
+			double get_vZ() const;
+	};
 }
+
+#endif

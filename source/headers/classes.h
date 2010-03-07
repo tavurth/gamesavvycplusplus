@@ -27,6 +27,8 @@ namespace gsc {
 
 	class Texture;
 	class TextureType;
+
+	class Sprite;
 }
 
 #endif
