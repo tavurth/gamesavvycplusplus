@@ -26,7 +26,7 @@ namespace gsc {
 		char * data;
 		std::string location;
 		short width, height, bpp;
-		int id, format, error;
+		int id, format, error, initialised;
 
 		void check();
 		void setup_parameters();
@@ -35,7 +35,7 @@ namespace gsc {
 			Texture();
 			Texture (int newWidth, int newHeight, int newBpp);
 			~Texture();
-			Texture * initialise();
+			Texture * initialise(int freeData = 0);
 			void free_data();
 			void erase();
 

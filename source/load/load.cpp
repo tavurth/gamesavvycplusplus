@@ -21,10 +21,9 @@ using namespace gsc;
 
 Texture * load::texture (std::string location, int initialise) {
 	Texture * temp = (* texture_type_find(location))(location);
-	//Intialise the texture (Create OpenGL ID etc)
-	temp->initialise();
-	//Freeing our texture data as we no longer require it.
-	temp->free_data();
+	if (initialise)
+		//Intialise the texture (Create OpenGL ID etc)
+		temp->initialise(1);
 
 	return temp;
 }

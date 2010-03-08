@@ -68,6 +68,7 @@ Texture * tga::load (std::string location) {
 	Texture * texture = new Texture();
 	texture->set_width(width);
 	texture->set_height(height);
+	texture->set_bpp(bpp);
 	texture->set_location(location);
 	texture->set_data(data);
 	texture->set_format(GL_BGRA);

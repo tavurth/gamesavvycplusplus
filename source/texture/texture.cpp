@@ -28,7 +28,7 @@ GLuint gsc::TEXTURE_MIN_FILTER = GL_LINEAR;
 GLuint gsc::TEXTURE_MAG_FILTER = GL_LINEAR;
 
 //Set functions
-void   Texture::set_data(char * new_data)		 { data     = new_data; }
+void   Texture::set_data(char * new_data) { if (data != NULL) free(data); data = new_data; }
 void   Texture::set_format(int new_format)		 { format   = new_format; }
 void   Texture::set_width(short new_width)		 { width    = new_width; }
 void   Texture::set_height(short new_height)		 { height   = new_height; }
@@ -43,7 +43,12 @@ int    Texture::get_format()	     { return format; }
 short  Texture::get_width()	     { return width; }
 short  Texture::get_height()	     { return height; }
 short  Texture::get_bpp()	     { return bpp; }
-int    Texture::get_id()	     { return id; }
+
+int Texture::get_id() { 
+	if (!initialised)
+		initialise(0);
+	return id;
+}
 
 //Check texture for errors
 void Texture::check () {
@@ -78,7 +83,7 @@ void Texture::setup_parameters () {
 }
 
 //Initialise a texture (Create OpenGL id etc)
-Texture * Texture::initialise() {
+Texture * Texture::initialise(int freeData) {
 	glGenTextures(1, (GLuint *) &id);
 	glBindTexture(GL_TEXTURE_2D, id);
 
@@ -86,10 +91,15 @@ Texture * Texture::initialise() {
 	setup_parameters();
 
 	//Create MipMaps and record any errors
-	error = gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGBA, width, height, GL_BGRA, GL_UNSIGNED_BYTE, data);
+	error = gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGBA, width, height, format, GL_UNSIGNED_BYTE, data);
 	
 	//Check that the texture has been created properly
 	this->check();
+
+	if (freeData)
+		this->free_data();
+
+	initialised = 1;
 
 	return this;
 }
@@ -103,16 +113,17 @@ void Texture::free_data() {
 //Constructor
 Texture::Texture () {
 	data = NULL;
-	width = height = bpp = id = format = error = 0;
+	width = height = bpp = id = format = error = initialised = 0;
 	textureList.push_back(this);
 }
 
 //Constructor
 Texture::Texture (int newWidth, int newHeight, int newBpp) {
 	data = NULL;
-	width 	= newWidth;
-	height 	= newHeight;
-	bpp 	= newBpp;
+	width 		= newWidth;
+	height 		= newHeight;
+	bpp 		= newBpp;
+	initialised 	= 0;
 	textureList.push_back(this);
 }
 
