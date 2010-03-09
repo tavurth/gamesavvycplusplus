@@ -65,7 +65,7 @@ char * Sprite::get_piece (char * data, int startX, int startY, int width, int he
 	return newData;
 }
 
-Texture * Sprite::get_single(int x, int y, int width, int height) {
+Texture * Sprite::get_single(int x, int y, int width, int height, int flip_vert) {
 
 	Texture * temp = new Texture(width, height, mainTexture->get_bpp());
 
@@ -73,15 +73,18 @@ Texture * Sprite::get_single(int x, int y, int width, int height) {
 	temp->set_format(mainTexture->get_format());
 	temp->set_location(mainTexture->get_location());
 
+	if (flip_vert)
+		flip_vertically(temp);
+
 	return temp->initialise(0);
 }
 
-std::vector<Texture *> Sprite::get_all(int sizeX, int sizeY) {
+std::vector<Texture *> Sprite::get_all(int sizeX, int sizeY, int flip_vert) {
 	std::vector<Texture *> textures;
 
 	for (int y = 0; y < sizeY; y++)
 		for (int x = 0; x < sizeX; x++)
-			textures.push_back(get_single(x * sizeX, y * sizeY, sizeX, sizeY));
+			textures.push_back(get_single(x * sizeX, y * sizeY, sizeX, sizeY, flip_vert));
 
 	return textures;
 }

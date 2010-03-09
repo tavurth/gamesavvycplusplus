@@ -29,6 +29,7 @@ namespace gsc {
 	class TextureType;
 
 	class Sprite;
+	class Font;
 }
 
 #endif

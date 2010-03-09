@@ -26,6 +26,7 @@
 #include "../texture/texture.h"
 #include "../texture/texture_type.h"
 #include "../sprite/sprite.h"
+#include "../text/font.h"
 
 //Timeline
 #include "../timeline/timeline.h"

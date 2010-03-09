@@ -13,8 +13,8 @@ namespace gsc {
 			Sprite(std::string location, int flip_vert = 0);
 			~Sprite();
 
-			Texture * get_single(int x, int y, int width, int height);
-			std::vector<Texture *> get_all(int sizeX, int sizeY);
+			Texture * get_single(int x, int y, int width, int height, int flip_vert = 0);
+			std::vector<Texture *> get_all(int sizeX, int sizeY, int flip_vert = 0);
 
 			Texture * get_main_texture() const;
 	};
