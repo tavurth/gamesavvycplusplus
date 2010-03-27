@@ -20,26 +20,41 @@
 using namespace gsc;
 using namespace tcp;
 
-void Remote::init() {
-	if (SDLNet_ResolveHost(ip, ipString.c_str(), port) == -1)
-		net_error();
-
-	if (!(socket = SDLNet_TCP_Open(ip)))
-		net_error();
+void Socket_Base::init_ip() {
+	ip = new IPaddress();
 }
 
-Remote::Remote(std::string newIP, Uint16 newPort) : Socket_Base(newIP, newPort) {
+Socket_Base::Socket_Base() {
+	init_ip();
+	port     = 0;
+	ipString = "localhost";
+}
+
+Socket_Base::Socket_Base(std::string newIP, short newPort) {
+	init_ip();
 	port     = newPort;
 	ipString = newIP;
+}
+
+Socket_Base::Socket_Base(short newPort) {
+	init_ip();
+	port = newPort;
+}
+
+Socket_Base::~Socket_Base() {
+	delete(ip);
+}
+
+//Port
+void Socket_Base::set_port(Uint16 newPort) { 
+	port = newPort; 
 	init();
 }
 
-Remote::~Remote() {
-	close_socket();
-}
+Uint16 Socket_Base::get_port() const { return port; }
 
-//IP
-void Remote::set_ip(std::string newIP) { 
-	ipString = newIP;
-	init();
-}
+void Socket_Base::close_socket() { SDLNet_TCP_Close(socket); }
+TCPsocket Socket_Base::get_socket() const { return socket; }
+
+IPaddress * Socket_Base::get_ip() const { return ip; }
+std::string Socket_Base::get_ip_string() const { return ipString; }

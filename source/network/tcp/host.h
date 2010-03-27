@@ -1,3 +1,20 @@
+//		Copyright (c) William Whitty 2010
+//
+//     This file is part of GSC. 
+//
+//     GSC is free software: you can redistribute it and/or modify
+//     it under the terms of the GNU Lesser General Public License as published by
+//     the Free Software Foundation, either version 3 of the License, or
+//     (at your option) any later version.
+//
+//     GSC is distributed in the hope that it will be useful,
+//     but WITHOUT ANY WARRANTY; without even the implied warranty of
+//     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//     GNU Lesser General Public License for more details.
+//
+//     You should have received a copy of the GNU Lesser General Public License
+//     along with GSC.  If not, see <http://www.gnu.org/licenses/>.
+
 #ifndef GSC_TCP_HOST
 #define GSC_TCP_HOST
 
@@ -6,11 +23,8 @@
 
 namespace gsc {
 	namespace tcp {
-		class Host {
+		class Host : public Socket_Base {
 			private:
-				Uint16 port;
-				TCPsocket socket;
-				IPaddress ip;
 				host_function function;
 				SDL_Thread * thread;
 				Uint16 sleepDelay;
@@ -18,15 +32,9 @@ namespace gsc {
 				std::vector<Client *> clientList;
 
 				void init();
-				void close_socket();
 			public:
 				Host(Uint16 newPort);
 				~Host();
-
-				void set_port(Uint16 newPort);
-				Uint16 get_port() const;
-
-				TCPsocket get_socket() const;
 
 				void set_sleep_delay(Uint16 newDelay);
 				Uint16 get_sleep_delay() const;
@@ -39,6 +47,8 @@ namespace gsc {
 
 				std::vector<Client *> get_clients() const;
 				void add_client(Client * newClient);
+
+				void set_ip(std::string newIP);
 		};
 
 		int host_loop(void *);

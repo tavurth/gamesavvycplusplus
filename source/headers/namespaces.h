@@ -44,6 +44,7 @@
 #include "../coords/vector_3d/vector_3d.h"
 
 //Network
+#include "../network/tcp/socket.h"
 #include "../network/tcp/tcp.h"
 #include "../network/tcp/client.h"
 #include "../network/tcp/host.h"
