@@ -44,6 +44,16 @@ namespace gsc {
 
 				IPaddress * get_ip() const;
 				std::string get_ip_string() const;
+
+				void send(void * data, int length) const;
+				void send(int to_send) const;
+				void send(double to_send) const;
+				void send(float to_send) const;
+				void send(std::string to_send) const;
+
+				int  recv_int() const;
+				std::string recv_str() const;
+				float recv_float() const;
 		};
 	}
 }
