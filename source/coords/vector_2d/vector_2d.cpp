@@ -15,33 +15,53 @@
 //     You should have received a copy of the GNU Lesser General Public License
 //     along with GSC.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef GSC_VECTOR_2D 
-#define GSC_VECTOR_2D
+#include "../../headers/GSC.h"
 
-#include "../../../headers/GSC.h"
+using namespace gsc;
 
-namespace gsc {
-	class Vector_2d {
-		protected:
-			double vX, vY;
-		public:
-			Vector_2d();
-			Vector_2d(double newVX, double newVY);
-			~Vector_2d();
-
-			void set(double, double);
-			void set_vX(double);
-			void set_vY(double);
-			
-			void incf_vX(double);
-			void incf_vY(double);
-
-			void decf_vX(double);
-			void decf_vY(double);
-
-			double get_vX() const;
-			double get_vY() const;
-	};
+Vector_2d::Vector_2d() {
+	vX = vY = 0;
 }
 
-#endif
+Vector_2d::Vector_2d(double newVX, double newVY) {
+	vX = newVX; vY = newVY;
+}
+
+Vector_2d::~Vector_2d() {
+}
+
+void Vector_2d::set(double newVX, double newVY) {
+	vX = newVX; vY = newVY;
+}
+
+void Vector_2d::set_vX(double newVX) {
+	vX = newVX;
+}
+
+void Vector_2d::set_vY(double newVY) {
+	vY = newVY;
+}
+
+void Vector_2d::incf_vX(double amount) {
+	vX += amount;
+}
+
+void Vector_2d::incf_vY(double amount) {
+	vY += amount;
+}
+
+void Vector_2d::decf_vX(double amount) {
+	vX -= amount;
+}
+
+void Vector_2d::decf_vY(double amount) {
+	vY -= amount;
+}
+
+double Vector_2d::get_vX() const {
+	return vX;
+}
+
+double Vector_2d::get_vY() const {
+	return vY;
+} 

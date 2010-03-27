@@ -19,8 +19,8 @@
 #define GSC_QUADTREE
 
 #include "../headers/GSC.h"
-#include "../misc/coords/point_2d/point_2d.h"
-#include "../misc/coords/rect_2d/rect_2d.h"
+#include "../coords/point_2d/point_2d.h"
+#include "../coords/rect_2d/rect_2d.h"
 
 namespace gsc {
 	template <class ContentType>

@@ -15,17 +15,28 @@
 //     You should have received a copy of the GNU Lesser General Public License
 //     along with GSC.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef GSC_INCLUDES
-#define GSC_INCLUDES
+#ifndef GSC_VECTOR_3D 
+#define GSC_VECTOR_3D
 
-#include <SDL/SDL.h>
-#include <SDL/SDL_opengl.h>
-#include <SDL/SDL_net.h>
-#include <iostream>
-#include <string>
-#include <vector>
-#include <fstream>
-#include <list>
-#include <math.h>
+#include "../../headers/GSC.h"
+
+namespace gsc {
+	class Vector_3d : public Vector_2d {
+		protected:
+			double vZ;
+		public:
+			Vector_3d();
+			Vector_3d(double newVX, double newVY, double newVZ);
+			~Vector_3d();
+
+			void set(double, double, double);
+			void set_vZ(double);
+
+			void incf_vZ(double);
+			void decf_vZ(double);
+
+			double get_vZ() const;
+	};
+}
 
 #endif

@@ -25,6 +25,8 @@ namespace gsc {
 	int  init (int argc, char ** argv);
 	int  init();
 	void quit(int quitCode = 0);
+	void net_error();
+	void thread_error();
 	void init_texture_types();
 
 }

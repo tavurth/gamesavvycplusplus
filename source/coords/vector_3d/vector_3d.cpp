@@ -15,34 +15,37 @@
 //     You should have received a copy of the GNU Lesser General Public License
 //     along with GSC.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef GSC_POINT_3D 
-#define GSC_POINT_3D
+#include "../../headers/GSC.h"
 
-#include "../../../headers/GSC.h"
+using namespace gsc;
 
-namespace gsc {
-	class Point_3d : public Point_2d {
-		protected:
-			double z;
-		public:
-			Point_3d();
-			Point_3d(double newX, double newY = 0, double newZ = 0);
-			~Point_3d();
-
-			void set(double, double, double);
-			void set_z(double);
-
-			void incf_z(double);
-			void decf_z(double);
-
-			double get_z() const;
-
-			double get_dist(Point_3d * p2) const;
-
-			bool   in_radius(Point_3d * p2, double radius) const;
-			bool   in_rect(Rect_2d * r) const;
-			bool   in_rect(double x1, double y1, double w, double h) const;
-	};
+Vector_3d::Vector_3d() : Vector_2d() {
+	vZ = 0;
 }
 
-#endif
+Vector_3d::Vector_3d(double newVX, double newVY, double newVZ) : Vector_2d(newVX, newVY) {
+	vZ = newVZ;
+}
+
+Vector_3d::~Vector_3d() {
+}
+
+void Vector_3d::set(double newVX, double newVY, double newVZ) {
+	vX = newVX; vY = newVY; vZ = newVZ;
+}
+
+void Vector_3d::set_vZ(double newVZ) {
+	vZ = newVZ;
+}
+
+void Vector_3d::incf_vZ(double amount) {
+	vZ += amount;
+}
+
+void Vector_3d::decf_vZ(double amount) {
+	vZ -= amount;
+}
+
+double Vector_3d::get_vZ() const {
+	return vZ;
+} 

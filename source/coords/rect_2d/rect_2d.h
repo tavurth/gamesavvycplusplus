@@ -15,27 +15,34 @@
 //     You should have received a copy of the GNU Lesser General Public License
 //     along with GSC.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef GSC_VECTOR_3D 
-#define GSC_VECTOR_3D
+#ifndef GSC_RECT_2D
+#define GSC_RECT_2D
 
-#include "../../../headers/GSC.h"
+#include "../../headers/GSC.h"
 
 namespace gsc {
-	class Vector_3d : public Vector_2d {
+	class Rect_2d {
 		protected:
-			double vZ;
+			Point_2d * p1, * p2;
+			double width, height;
+
 		public:
-			Vector_3d();
-			Vector_3d(double newVX, double newVY, double newVZ);
-			~Vector_3d();
+			Rect_2d (double newX, double newY, double newW, double newH);
+			~Rect_2d ();
 
-			void set(double, double, double);
-			void set_vZ(double);
+			void set_p1(Point_2d * newP);
+			void set_p2(Point_2d * newP);
+			void set_width(double newWidth);
+			void set_height(double newHeight);
 
-			void incf_vZ(double);
-			void decf_vZ(double);
-
-			double get_vZ() const;
+			Point_2d * get_p1() const;
+			Point_2d * get_p2() const;
+			double     get_x() const;
+			double     get_x2() const;
+			double     get_y() const;
+			double     get_y2() const;
+			double	   get_width() const;
+			double	   get_height() const;
 	};
 }
 

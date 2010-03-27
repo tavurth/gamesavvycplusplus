@@ -18,7 +18,7 @@
 #ifndef GSC_POINT_2D 
 #define GSC_POINT_2D
 
-#include "../../../headers/GSC.h"
+#include "../../headers/GSC.h"
 
 namespace gsc {
 	class Point_2d {
@@ -33,11 +33,11 @@ namespace gsc {
 			void set_x(double);
 			void set_y(double);
 
-			void incf_x(double);
-			void incf_y(double);
+			void incf_x(double = 1);
+			void incf_y(double = 1);
 
-			void decf_x(double);
-			void decf_y(double);
+			void decf_x(double = 1);
+			void decf_y(double = 1);
 
 			double get_x() const;
 			double get_y() const;

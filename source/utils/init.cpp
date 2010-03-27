@@ -45,6 +45,8 @@ int gsc::init (int argc, char ** argv) {
 	glEnable(GL_BLEND);
 	glEnable(GL_TEXTURE_2D);
 
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
 	timeline::init();
 	
 	return 0;
@@ -59,4 +61,14 @@ void gsc::quit (int quitCode) {
 	texture_type_delete_all();
 
 	exit(quitCode);
+}
+
+void gsc::net_error() {
+	std::cout << "SDLNet error: " << SDLNet_GetError();
+	gsc::quit();
+}
+
+void gsc::thread_error() {
+	std::cout << "SDL thread error: " << SDL_GetError();
+	gsc::quit();
 }

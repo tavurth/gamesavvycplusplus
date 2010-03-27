@@ -25,8 +25,8 @@ namespace gsc {
 
 	namespace utils {
 		FILE * openBinaryFile(std::string location);
-		void   fatal(std::string error);
-		void   fatal();
+		void fatal(std::string error);
+		void fatal();
 		void * c_malloc(size_t size);
 		char * new_str(int size);
 

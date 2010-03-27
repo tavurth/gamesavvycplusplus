@@ -17,7 +17,7 @@
 ##     You should have received a copy of the GNU Lesser General Public License
 ##     along with GSC.  If not, see <http://www.gnu.org/licenses/>.
 
-my $LIBS  = "-lSDL -lGL -lGLU";
+my $LIBS  = "`sdl-config --cflags` `sdl-config --libs` -lSDL_net -lGL -lGLU";
 my $FLAGS = "-Wall";
 
 my @C_FILES = `find source/ -regex \".*.cpp\" -printf "%p\n"`;

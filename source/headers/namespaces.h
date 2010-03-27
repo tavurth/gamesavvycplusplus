@@ -37,10 +37,16 @@
 #include "../load/load.h"
 
 //Coords
-#include "../misc/coords/point_2d/point_2d.h"
-#include "../misc/coords/point_3d/point_3d.h"
-#include "../misc/coords/rect_2d/rect_2d.h"
-#include "../misc/coords/vector_2d/vector_2d.h"
-#include "../misc/coords/vector_3d/vector_3d.h"
+#include "../coords/point_2d/point_2d.h"
+#include "../coords/point_3d/point_3d.h"
+#include "../coords/rect_2d/rect_2d.h"
+#include "../coords/vector_2d/vector_2d.h"
+#include "../coords/vector_3d/vector_3d.h"
+
+//Network
+#include "../network/tcp/tcp.h"
+#include "../network/tcp/client.h"
+#include "../network/tcp/host.h"
+#include "../network/tcp/remote.h"
 
 #endif
