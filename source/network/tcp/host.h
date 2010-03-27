@@ -47,11 +47,10 @@ namespace gsc {
 
 				std::vector<Client *> get_clients() const;
 				void add_client(Client * newClient);
+				void remove_client(Client * newClient);
 
 				void set_ip(std::string newIP);
 		};
-
-		int host_loop(void *);
 	}
 }
 

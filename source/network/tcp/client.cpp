@@ -27,11 +27,16 @@ tcp::Client::Client(TCPsocket newSocket, Host * newParent) {
 		net_error();
 }
 
+tcp::Client::Client() {
+}
+
 tcp::Client::~Client() {
 }
         
 void tcp::Client::kill() {
-	SDL_KillThread(thread);
+	if (thread)
+		SDL_KillThread(thread);
+	thread = NULL;
 }
 
 SDL_Thread * tcp::Client::set_thread(SDL_Thread * newThread) { thread = newThread; return thread; }

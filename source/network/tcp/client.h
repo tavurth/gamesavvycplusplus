@@ -27,8 +27,10 @@ namespace gsc {
 			private:
 				SDL_Thread * thread;
 				Host * parent;
+				int flags;
 			public:
 				Client(TCPsocket newSocket, Host * newParent);
+				Client();
 				~Client();
 
 				void kill();

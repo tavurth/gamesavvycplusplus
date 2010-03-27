@@ -31,10 +31,12 @@ void Remote::init() {
 Remote::Remote(std::string newIP, Uint16 newPort) : Socket_Base(newIP, newPort) {
 	port     = newPort;
 	ipString = newIP;
+	ip = new IPaddress();
 	init();
 }
 
 Remote::~Remote() {
+	delete(ip);
 	close_socket();
 }
 

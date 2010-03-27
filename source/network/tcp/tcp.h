@@ -29,6 +29,9 @@ namespace gsc {
 
 		typedef void (*host_function)(Client *);
 		extern const int IS_ACTIVE;
+
+		int host_loop(void *);
+		int client_begin(Client * newClient);
 	}
 }
 

@@ -20,29 +20,21 @@
 using namespace gsc;
 using namespace tcp;
 
-void Socket_Base::init_ip() {
-	ip = new IPaddress();
-}
-
 Socket_Base::Socket_Base() {
-	init_ip();
 	port     = 0;
 	ipString = "localhost";
 }
 
 Socket_Base::Socket_Base(std::string newIP, short newPort) {
-	init_ip();
 	port     = newPort;
 	ipString = newIP;
 }
 
 Socket_Base::Socket_Base(short newPort) {
-	init_ip();
 	port = newPort;
 }
 
 Socket_Base::~Socket_Base() {
-	delete(ip);
 }
 
 //Port
