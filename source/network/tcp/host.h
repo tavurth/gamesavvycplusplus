@@ -39,8 +39,8 @@ namespace gsc {
 				void set_sleep_delay(Uint16 newDelay);
 				Uint16 get_sleep_delay() const;
 
-				void set_function (host_function newFunction);
-				host_function get_function() const;
+				void set_client_loop_function (host_function newFunction);
+				host_function get_client_loop_function() const;
 
 				int get_flags() const;
 				void set_flags(int newFlags);

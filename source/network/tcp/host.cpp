@@ -60,8 +60,8 @@ Host::~Host() {
 void Host::set_sleep_delay(Uint16 newDelay) { sleepDelay = newDelay; }
 Uint16 Host::get_sleep_delay() const { return sleepDelay; }
 
-void Host::set_function(host_function newFunction) { function = newFunction; }
-host_function Host::get_function() const { return function; }
+void Host::set_client_loop_function(host_function newFunction) { function = newFunction; }
+host_function Host::get_client_loop_function() const { return function; }
 
 int Host::get_flags() const { return flags; }
 void Host::set_flags(int newFlags) { flags = newFlags; }

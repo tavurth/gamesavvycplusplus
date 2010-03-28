@@ -26,7 +26,7 @@ int gsc::tcp::client_begin(Client * newClient) {
 	Host * parent = newClient->get_parent();
 
 	//Call the client_loop function
-	(*parent->get_function())(newClient);
+	(*parent->get_client_loop_function())(newClient);
 
 	//When we fall out of the client loop, delete the client;
 	delete(newClient);
@@ -54,4 +54,3 @@ int gsc::tcp::host_loop(void * data) {
 	}
 	return 0;
 }
-
