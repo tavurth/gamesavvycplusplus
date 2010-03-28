@@ -32,6 +32,8 @@ namespace gsc {
 
 		int host_loop(void *);
 		int client_begin(Client * newClient);
+
+		void delete_all();
 	}
 }
 

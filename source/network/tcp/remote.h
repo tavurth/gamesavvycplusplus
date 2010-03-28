@@ -26,14 +26,19 @@ namespace gsc {
 		class Remote : public Socket_Base {
 			private:
 				std::string ipString;
+				SDL_Thread * thread;
 
 				void init();
 			public:
 				Remote(std::string newIP, Uint16 newPort);
+				Remote(std::string newIP, Uint16 newPort, void (*threadFunc)(Remote *));
 				~Remote();
 
 				void set_ip(std::string newIP);
 		};
+
+		extern std::vector<Remote *> remoteList;
+		void delete_all_remotes();
 	}
 }
 

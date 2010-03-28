@@ -54,3 +54,8 @@ int gsc::tcp::host_loop(void * data) {
 	}
 	return 0;
 }
+
+void tcp::delete_all() {
+	delete_all_hosts();
+	delete_all_remotes();
+}

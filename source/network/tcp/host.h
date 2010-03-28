@@ -51,6 +51,9 @@ namespace gsc {
 
 				void set_ip(std::string newIP);
 		};
+
+		extern std::vector<Host *> hostList;
+		void delete_all_hosts();
 	}
 }
 

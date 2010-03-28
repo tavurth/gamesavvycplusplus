@@ -59,6 +59,7 @@ int gsc::init () {
 void gsc::quit (int quitCode) {
 	texture_delete_all();
 	texture_type_delete_all();
+	network_delete_all();
 
 	exit(quitCode);
 }

@@ -20,6 +20,8 @@
 using namespace gsc;
 using namespace tcp;
 
+std::vector<Remote *> tcp::remoteList;
+
 void Remote::init() {
 	if (SDLNet_ResolveHost(ip, ipString.c_str(), port) == -1)
 		net_error();
@@ -33,15 +35,40 @@ Remote::Remote(std::string newIP, Uint16 newPort) : Socket_Base(newIP, newPort) 
 	ipString = newIP;
 	ip = new IPaddress();
 	init();
+
+	remoteList.push_back(this);
+}
+
+Remote::Remote(std::string newIP, Uint16 newPort, void (*threadFunc)(Remote *)) : Socket_Base(newIP, newPort) {
+	port     = newPort;
+	ipString = newIP;
+	ip = new IPaddress();
+	init();
+
+	//Start the thread
+	if (!(thread = SDL_CreateThread((int (*)(void *))threadFunc, (void *)this)))
+		thread_error();
+
+	remoteList.push_back(this);
 }
 
 Remote::~Remote() {
 	delete(ip);
 	close_socket();
+	if (thread)
+		SDL_KillThread(thread);
 }
 
 //IP
 void Remote::set_ip(std::string newIP) { 
 	ipString = newIP;
 	init();
+}
+
+void tcp::delete_all_remotes() {
+	std::vector<Remote *>::iterator it;
+
+	for (it = remoteList.begin(); it < remoteList.end(); it++)
+		delete(*it);
+	remoteList.clear();
 }

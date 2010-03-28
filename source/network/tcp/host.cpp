@@ -21,6 +21,8 @@
 using namespace gsc;
 using namespace tcp;
 
+std::vector<Host *> tcp::hostList;
+
 void Host::init() {
 	//Create our IP
 	if ((SDLNet_ResolveHost(ip, NULL, port)) == -1)
@@ -38,10 +40,12 @@ void Host::init() {
 //Constructor
 Host::Host(Uint16 newPort) : Socket_Base(newPort) {
 	flags = IS_ACTIVE;
-	sleepDelay = 150;
+	sleepDelay = 50;
 	ip = new IPaddress();
 
 	init();
+
+	hostList.push_back(this);
 }
 
 Host::~Host() {
@@ -81,4 +85,12 @@ void Host::remove_client(Client * newClient) {
 void Host::set_ip(std::string newIP) { 
 	ipString = newIP;
 	init();
+}
+
+void tcp::delete_all_hosts() {
+	std::vector<Host *>::iterator it;
+
+	for (it = hostList.begin(); it < hostList.end(); it++)
+		delete(*it);
+	hostList.clear();
 }
