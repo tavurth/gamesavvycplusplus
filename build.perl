@@ -2,7 +2,7 @@
 
 ##		Copyright (c) William Whitty 2010
 ##
-##     This file is part of GSC. 
+##     This file is part of GSC.
 ##
 ##     GSC is free software: you can redistribute it and/or modify
 ##     it under the terms of the GNU Lesser General Public License as published by
@@ -18,7 +18,7 @@
 ##     along with GSC.  If not, see <http://www.gnu.org/licenses/>.
 
 my $LIBS  = "`sdl-config --cflags` `sdl-config --libs` -lSDL_net -lGL -lGLU";
-my $FLAGS = "-Wall";
+my $FLAGS = "-Wall -fPIC";
 
 my @C_FILES = `find source/ -regex \".*.cpp\" -printf "%p\n"`;
 
@@ -29,7 +29,7 @@ if ($^O eq 'linux') { system("clear"); }
 elsif ($^O eq 'MSWin32') { system("cls"); }
 
 sub check_bin {
-	if ($^O eq 'linux') { `mkdir bin/` if not -d "bin"; } 
+	if ($^O eq 'linux') { `mkdir bin/` if not -d "bin"; }
 }
 
 sub compile_file_linux ($$) {
@@ -76,7 +76,7 @@ sub compile_files {
 }
 
 sub clean {
-	if ($^O eq 'linux') { 
+	if ($^O eq 'linux') {
 		my $command = "rm -rf bin GSC.so GSC.a\n";
 		print $command and `$command`;
 	}

@@ -1,6 +1,6 @@
 //		Copyright (c) William Whitty 2010
 //
-//     This file is part of GSC. 
+//     This file is part of GSC.
 //
 //     GSC is free software: you can redistribute it and/or modify
 //     it under the terms of the GNU Lesser General Public License as published by
@@ -18,7 +18,7 @@
 #ifndef GAME_MAIN
 #define GAME_MAIN
 
-#include "../../../GSC/source/headers/GSC.h"
-#include "namespaces.h" 
+#include "../../../source/headers/GSC.h"
+#include "namespaces.h"
 
 #endif

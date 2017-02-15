@@ -11,7 +11,7 @@ if ($^O eq 'linux') { system("clear"); }
 elsif ($^O eq 'MSWin32') { system("cls"); }
 
 sub check_bin {
-	if ($^O eq 'linux') { `mkdir bin/` if not -d "bin"; } 
+	if ($^O eq 'linux') { `mkdir bin/` if not -d "bin"; }
 }
 
 sub compile_file_linux ($$) {
@@ -36,7 +36,7 @@ sub compile_linux {
 		else {  compile_file_linux($file, "bin/$1.o"); }
 	}
 
-	my $command = "g++ bin/*.o $FLAGS $LIBS -o bin/main ../GSC/GSC.so && ./bin/main\n";
+	my $command = "g++ bin/*.o $FLAGS $LIBS -o bin/main ../GSC.so && ./bin/main\n";
 	print $command and system("$command");
 
 	print "\nBuild complete!\n";
@@ -47,7 +47,7 @@ sub compile_files {
 }
 
 sub clean {
-	if ($^O eq 'linux') { 
+	if ($^O eq 'linux') {
 		my $command = "rm -rf bin\n";
 		print $command and `$command`;
 	}
